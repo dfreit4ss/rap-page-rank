@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/rap-page-rank.iml" filepath="$PROJECT_DIR$/rap-page-rank.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rap-page-rank-1.iml" filepath="$PROJECT_DIR$/rap-page-rank-1.iml" />
     </modules>
   </component>
 </project>
