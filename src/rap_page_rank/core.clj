@@ -4,12 +4,17 @@
 
 
 (defn reading-text-file
-  [text-path]
-  (let [artists '("Tim maia" "tim maia" "sabotage" "sabota" "Sabotage")]
+  [text-path artists]
     (with-open [rdr (reader text-path)]
       (doseq [line (line-seq rdr)]
-        (if (clojure.string/includes? line "Tim Maia") ;;verify if in line have Tim maia
+        (if (clojure.string/includes? line "Tim Maia") ;;verify if in line have "Tim maia"
           (println "Achou")
-          (println "Nao achou"))))))
+          (println "Nao achou")))))
 
-(reading-text-file "src/rap_page_rank/teste.txt")
+(re-seq #"Tim Maia" (slurp "src/lyrics/Jorge Ben Jor - W Brasil")) ;;fazer uma lista separada dos artistas
+
+(defn artists [] (list "Tim Maia" "Sabotage" "Gilberto Gil" "Caetano" "Djavan" "Pepeu" "Alceu Valença" "Moraes" "Elba"
+                       "Ed Motta" "Cidade Negra" "Skank" "Jorge Ben Jor"))
+
+
+(reading-text-file "src/lyrics/Jorge Ben Jor - W Brasil" (artists))
