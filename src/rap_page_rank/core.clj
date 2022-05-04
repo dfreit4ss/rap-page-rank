@@ -1,7 +1,12 @@
 (ns rap-page-rank.core)
+(ns rap-page-rank.core
+  (:require [ubergraph.core :as uber]))
 
 (require '[clojure.string :as str])
 (use 'clojure.java.io)
+
+
+
 
 
 (defn artists [] (list "Tim Maia" "Sabotage" "Gilberto Gil" "Caetano" "Djavan" "Pepeu" "Alceu Valença" "Moraes" "Elba"
@@ -15,9 +20,9 @@
 (defn find-artist
   [text list-of-artist]
   (if (empty? list-of-artist)
-    (list )
+    (list );;maybe start to insert in graphs here
     ((print-matches (list (first list-of-artist)
-                    (count (re-seq (re-pattern (first list-of-artist)) text))))
+                    (count (re-seq (re-pattern (first list-of-artist)) text)))) ;; or here
      (find-artist text (rest list-of-artist)))))
 
 
@@ -31,6 +36,11 @@
 
 ;; re-pattern : string -> pattern(regex)
 ;; re-seq : find a regex in string
+
+(def graph1
+  (uber/graph [:a :b] [:a :c] [:b :d]))
+
+#_(uber/pprint graph1)
 
 ;(re-seq (re-pattern (first (artists)))  (slurp "src/lyrics/Jorge Ben Jor - W Brasil"))
 (reading-lyrics-files (lyrics) (artists))
