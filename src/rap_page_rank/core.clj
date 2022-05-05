@@ -1,10 +1,16 @@
-(ns rap-page-rank.core)
 (ns rap-page-rank.core
   (:require [ubergraph.core :as uber]))
 
 (require '[clojure.string :as str])
 (use 'clojure.java.io)
 
+
+
+;; Page-rank
+
+(defn page-rank
+  [graph]
+  )
 
 
 
@@ -17,13 +23,29 @@
   [lista-de-matches]
   (println lista-de-matches))
 
-(defn find-artist
+#_(defn find-artist
   [text list-of-artist]
   (if (empty? list-of-artist)
     (list );;maybe start to insert in graphs here
-    ((print-matches (list (first list-of-artist)
+    (do
+      (print-matches (list (first list-of-artist)
                     (count (re-seq (re-pattern (first list-of-artist)) text)))) ;; or here
      (find-artist text (rest list-of-artist)))))
+
+(defn find-artist
+  "Return a list of matches (artist count)"
+  [text list-of-artist]
+  (reduce (fn [acc x]
+            (conj acc [x (count (re-seq (re-pattern x) text))]))
+          [] list-of-artist))
+
+(defn slurp-lyrics-files
+  [text-path]
+  (slurp text-path)
+  )
+
+
+
 
 
 (defn reading-lyrics-files
@@ -36,6 +58,9 @@
 
 ;; re-pattern : string -> pattern(regex)
 ;; re-seq : find a regex in string
+
+
+
 
 (def graph1
   (uber/graph [:a :b] [:a :c] [:b :d]))
