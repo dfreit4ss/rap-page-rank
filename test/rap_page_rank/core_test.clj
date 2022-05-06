@@ -16,3 +16,7 @@
 (deftest reading-lyrics-files-test
   (testing "Testing the recursion to read all lyrics"
     (is (list? (reading-lyrics-files (lyrics) (artists)))))) ;; idk how can i test this
+
+(deftest insert-in-graph
+  (testing "Testing insertion in graph with ubergraph"
+    (is (= ))))
