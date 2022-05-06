@@ -6,7 +6,7 @@
 
 
 (defn artists [] (list "Tim Maia" "Sabotage" "Gilberto Gil" "Caetano" "Djavan" "Pepeu" "Alceu Valença" "Moraes" "Elba"
-                       "Ed Motta" "Cidade Negra" "Skank" "Jorge Ben Jor" ))
+                       "Ed Motta" "Cidade Negra" "Skank" "Jorge Ben Jor"))
 (defn lyrics [] (list "resources/lyrics/Jorge Ben Jor - W Brasil" "resources/lyrics/Gabriel Pensador - Festa da Musica Tupiniquim" ))
 
 
@@ -17,15 +17,15 @@
 
 
 (defn insert-in-graph
-  [vector-of-matches artist-name ]
+  [vector-of-matches artist-name]
   (if (= (first vector-of-matches) artist-name)
-    (uber/pprint page-rank-graph)
+    (list  page-rank-graph)
     (if (= 0 (second (first vector-of-matches)))
       (insert-in-graph (rest vector-of-matches) artist-name)
       (do
-        (uber/add-directed-edges page-rank-graph [artist-name
+        (uber/pprint (uber/add-directed-edges page-rank-graph [artist-name
                                                   (first (first vector-of-matches))
-                                                  (second (first vector-of-matches))])
+                                                  (second (first vector-of-matches))]))
         (insert-in-graph (rest vector-of-matches) artist-name)))))
 
 (defn page-rank
@@ -46,7 +46,8 @@
   (if (empty? lyrics)
     (list)
     (do
-      (page-rank (conj (find-artist (slurp (first lyrics)) artists) (first (split-with #"-" (str/split (first lyrics) #"\W" 3)))))
+      (page-rank (conj (find-artist (slurp (first lyrics)) artists)
+                       (first (split-with #"-" (str/split (first lyrics) #"\W" 3)))))
       (reading-lyrics-files (rest lyrics) artists))))
 
 ;; re-pattern : string -> pattern(regex)
