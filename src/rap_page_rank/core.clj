@@ -34,10 +34,10 @@
 (defn reading-lyrics-files
   [lyrics artists]
   (if (empty? lyrics)
-    (list "End of recursion")
+    (list )
     (do
       (find-artist (slurp (first lyrics)) artists)
-      (reading-lyrics-files2 (rest lyrics) artists))))
+      (reading-lyrics-files (rest lyrics) artists))))
 
 ;; re-pattern : string -> pattern(regex)
 ;; re-seq : find a regex in string
